@@ -11,7 +11,7 @@ const Calendar = () => {
     const [selectedDate, setSelectedDate] = useState(currentDate)
     const [showEventPopup, setShowEventPopup] = useState(false)
     const [events, setEvents] = useState([])
-    const [eventTime, setEventTime] = useState({ hours: '00', minutes: "00" })
+    const [eventTime, setEventTime] = useState({ hours: '', minutes: "" })
     const [eventText, setEventText] = useState('')
     const [editingEvent, setEditingEvent] = useState(null)
 
@@ -35,7 +35,7 @@ const Calendar = () => {
         setSelectedDate(clickedDate)
         setShowEventPopup(true)
         setEventText("")
-        setEventTime({ hours: '00', minutes: "00" })
+        setEventTime({ hours: '', minutes: "" })
         setEditingEvent(null)
 
         // if (clickedDate >= today) {
@@ -72,7 +72,7 @@ const Calendar = () => {
         updatedEvents.sort((a, b) => new Date(a.date) - new Date(b.date))
 
         setEvents(updatedEvents)
-        setEventTime({ hours: '00', minutes: "00" })
+        setEventTime({ hours: '', minutes: "" })
         setEventText("")
         setShowEventPopup(false)
         setEditingEvent(null)
@@ -98,13 +98,13 @@ const Calendar = () => {
     const handleTimeChange = (e) =>{
         const {name, value} = e.target
 
-        setEventTime((prevTime)=> ({...prevTime, [name]: value.padStart(2, '0')}))
+        setEventTime((prevTime)=> ({...prevTime, [name]: value.padStart(2, '')}))
     }
 
     return (
         <div className='appliation-calendar'>
             <div className='calendar'>
-                <h1 className='heading' >Caldenar12</h1>
+                <h1 className='heading' >Calendar</h1>
                 <div className='navigate-date'>
                     <h2 className='month'> {monthOfYear[currentMonth]},</h2>
                     <h2 className='year'>{currentYear}</h2>
@@ -148,8 +148,8 @@ const Calendar = () => {
                         </div>
                         <div className="event-text">{event.text}</div>
                         <div className="event-buttons">
-                            <i className="bx bxs-edit-alt" onClick={()=> handleEditEvent(event)}></i>
-                            <i className="bx bxs-message-alt-x" onClick={()=> handleDeleteEvent(event.id)}></i>
+                            <i Style="font-size:200%" className="bx bxs-edit-alt" onClick={()=> handleEditEvent(event)}></i>
+                            <i Style="font-size:200%" className="bx bxs-message-alt-x" onClick={()=> handleDeleteEvent(event.id)}></i>
                         </div>
                     </div>
                 ))}

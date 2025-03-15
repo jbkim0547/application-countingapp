@@ -17,14 +17,12 @@ function App() {
       <Router>
         <Routes>
           <Route path="/count" element={<Count />} />
+          <Route path="/calendar" element={<Calendar />} />
         </Routes>
       </Router>
     <div>
     <br></br>
     </div>
-      <div className="calendarContainer">
-      <Calendar />
-      </div>
     </React.Fragment>
 
 
