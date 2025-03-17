@@ -11,6 +11,10 @@ import './Calendar/Calendar.css'
 const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 
 function App() {
+  React.useEffect(() => {
+    document.title= "Job Helper";
+  })
+
   return (
     <React.Fragment>
       <NavBar />
