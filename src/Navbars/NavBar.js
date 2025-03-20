@@ -15,6 +15,7 @@ function NavBar() {
                     <Nav className="me-auto">
                         <Nav.Link href="/count">Application Count</Nav.Link>
                         <Nav.Link href="/calendar">Calendar</Nav.Link>
+                        <Nav.Link href="/jobScript">Job Script</Nav.Link>
                         <NavDropdown title="Dropdown" id="basic-nav-dropdown">
                             <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
                             <NavDropdown.Item href="#action/3.2">

@@ -5,6 +5,7 @@ import NavBar from './Navbars/NavBar';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Calendar from './Calendar/Calendar';
 import './Calendar/Calendar.css'
+import JobScript from './JobScript/JobScript';
 
 
 
@@ -18,6 +19,7 @@ function App() {
         <Routes>
           <Route path="/count" element={<Count />} />
           <Route path="/calendar" element={<Calendar />} />
+          <Route path="/jobScript" element={<JobScript />} />
         </Routes>
       </Router>
     <div>
