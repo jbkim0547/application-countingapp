@@ -13,7 +13,7 @@ function NavBar() {
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="me-auto">
-                        <Nav.Link href="/count/job">Application Count</Nav.Link>
+                        <Nav.Link href="/count">Application Count</Nav.Link>
                         <Nav.Link href="/calendar">Calendar</Nav.Link>
                         <Nav.Link href="/jobScript">Job Script</Nav.Link>
                         <NavDropdown title="Dropdown" id="basic-nav-dropdown">
