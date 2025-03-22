@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 
 const Calendar = () => {
 
-    const daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
+    const daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "SUN"]
     const monthOfYear = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
     const currentDate = new Date()
 
