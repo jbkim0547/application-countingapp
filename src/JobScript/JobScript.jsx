@@ -1,7 +1,7 @@
 const JobScript = () => {
   return (
     <textarea
-      defaultValue=" LinkedIn profile
+      default=" LinkedIn profile
 https://www.linkedin.com/in/jb-kim-14a820132/
 
 Github Profile
