@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 const Calendar = () => {
 
     const daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
-    const monthOfYear = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+    const monthOfYear = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December", "And so on.."]
     const currentDate = new Date()
 
     const [currentMonth, setCurrentMonth] = useState(currentDate.getMonth());
