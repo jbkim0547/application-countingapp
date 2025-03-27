@@ -40,7 +40,7 @@ const JobScript = () => {
         <br /> <br />
         Thank you!
         <br />
-        Jay Kim Source <br /> <br />
+        Jay Kim <br /> <br />Source 
         interviewcake <br />
         CanVa.com <br />
         Leecode <br />

@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import axios from 'axios'
 
 const Calendar = () => {
 
@@ -52,7 +53,8 @@ const Calendar = () => {
         )
     }
 
-    const handleEventSubmit = () => {
+    const handleEventSubmit = async (event) => {
+        event.preventDefault();
         const newEvent = {
             id: editingEvent ? editingEvent.id : Date.now(),
             date: selectedDate,
@@ -76,6 +78,19 @@ const Calendar = () => {
         setEventText("")
         setShowEventPopup(false)
         setEditingEvent(null)
+
+        console.log(event);
+
+        const testEvent = {
+            id: "1",
+            date: "e"
+        }
+
+        const response = await axios.post("https://localhost:7192/api/calendar", newEvent, {
+            headers : {
+                "Content-Type": "application/json",
+            },
+        })
     }
 
     const handleEditEvent = (event) =>{
@@ -99,6 +114,8 @@ const Calendar = () => {
         const {name, value} = e.target
 
         setEventTime((prevTime)=> ({...prevTime, [name]: value.padStart(2, '')}))
+
+
     }
 
     return (
@@ -125,7 +142,7 @@ const Calendar = () => {
             <div className="events">
                 {showEventPopup && (<div className="event-popup">
                     <div className="time-input">
-                        <div className="event-popup-time">Time</div>
+                        <div className="event-popup-time">Time1</div>
                         <input type="number" name="hours" min={0} max={24} className='hours' value={eventTime.hours} onChange={handleTimeChange} />
                         <input type="number" name="minutes" min={0} max={60} className='minutes' value={eventTime.minutes} onChange={handleTimeChange} />
                     </div>
