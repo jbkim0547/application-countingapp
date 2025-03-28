@@ -25,7 +25,8 @@ const Calendar = () => {
   const [showEventPopup, setShowEventPopup] = useState(false);
   const [events, setEvents] = useState([]);
   const [eventTime, setEventTime] = useState({ hours: "", minutes: "" });
-  const [eventText, setEventText] = useState("");
+  const [eventNote, setEventNote] = useState("");
+  const [eventCompany, setEventCompany] = useState("");
   const [editingEvent, setEditingEvent] = useState(null);
 
   const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
@@ -51,7 +52,7 @@ const Calendar = () => {
 
     setSelectedDate(clickedDate);
     setShowEventPopup(true);
-    setEventText("");
+    setEventNote("");
     setEventTime({ hours: "", minutes: "" });
     setEditingEvent(null);
 
@@ -74,12 +75,13 @@ const Calendar = () => {
     const newEvent = {
       id: editingEvent ? editingEvent.id : Date.now(),
       date: selectedDate,
-      time: `${eventTime.hours.padStart(2, "0")}:${eventTime.minutes.padStart(
-        2,
-        "0"
-      )}`,
-      text: eventText,
+      eventHour: `${eventTime.hours.padStart(2, "0")}`,
+      eventMinute: `${eventTime.minutes.padStart(2, "0")}`,
+      company: eventCompany,
+      note: eventNote,
     };
+
+    console.log(newEvent);
 
     let updatedEvents = [...events];
 
@@ -95,7 +97,7 @@ const Calendar = () => {
 
     setEvents(updatedEvents);
     setEventTime({ hours: "", minutes: "" });
-    setEventText("");
+    setEventNote("");
     setShowEventPopup(false);
     setEditingEvent(null);
 
@@ -107,7 +109,7 @@ const Calendar = () => {
     };
 
     const response = await axios.post(
-      "https://localhost:7192/api/calendar",
+      "http://localhost:5065/api/interviewNote",
       newEvent,
       {
         headers: {
@@ -115,6 +117,8 @@ const Calendar = () => {
         },
       }
     );
+
+    console.log(newEvent);
   };
 
   const handleEditEvent = (event) => {
@@ -123,7 +127,7 @@ const Calendar = () => {
       hours: event.time.split(":")[0],
       minutes: event.time.split(":")[1],
     });
-    setEventText(event.text);
+    setEventNote(event.text);
     setEditingEvent(event);
     setShowEventPopup(true);
   };
@@ -207,14 +211,18 @@ const Calendar = () => {
             </div>
             <div className="event-popup-company-name">
               <div className="companyName">Company Name</div>
-              <input></input>
+              <input
+                placeholder="Enter Company Name"
+                value={eventCompany}
+                onChange={(e) => setEventCompany(e.target.value)}
+              />
             </div>
             <textarea
               placeholder="Enter Event Text (Maximum 60)"
-              value={eventText}
+              value={eventNote}
               onChange={(e) => {
                 if (e.target.value.length <= 60) {
-                  setEventText(e.target.value);
+                  setEventNote(e.target.value);
                 }
               }}
             ></textarea>
