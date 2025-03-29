@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 
 const Calendar = () => {
@@ -28,9 +28,23 @@ const Calendar = () => {
   const [eventNote, setEventNote] = useState("");
   const [eventCompany, setEventCompany] = useState("");
   const [editingEvent, setEditingEvent] = useState(null);
+  const [scheduleData, setScheduleData] = useState(null);
 
   const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
   const firstDayOfMonth = new Date(currentYear, currentMonth, 1).getDate();
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:5065/api/interviewNote")
+      .then((response) => {
+        setScheduleData(response.data);
+        console.log(response.data);
+        setEvents(response.data);
+      })
+      .catch((error) => {
+        console.log("error");
+      });
+  }, []);
 
   const prevMonth = () => {
     setCurrentMonth((prevMonth) => (prevMonth === 0 ? 11 : prevMonth - 1));
@@ -98,15 +112,11 @@ const Calendar = () => {
     setEvents(updatedEvents);
     setEventTime({ hours: "", minutes: "" });
     setEventNote("");
+    setEventCompany("");
     setShowEventPopup(false);
     setEditingEvent(null);
 
     console.log(event);
-
-    const testEvent = {
-      id: "1",
-      date: "e",
-    };
 
     const response = await axios.post(
       "http://localhost:5065/api/interviewNote",
@@ -240,12 +250,9 @@ const Calendar = () => {
         {events.map((event, index) => (
           <div className="event" key={index}>
             <div className="event-date-wrapper">
-              <div className="event-date">{`${
-                monthOfYear[event.date.getMonth()]
-              } ${event.date.getDate()}, ${event.date.getFullYear()}`}</div>
-              <div className="event-time">{event.time}</div>
+              <div className="event-date">{event.date}</div>
             </div>
-            <div className="event-text">{event.text}</div>
+            <div className="event-company">{event.company}</div>
             <div className="event-buttons">
               <i
                 Style="font-size:200%"

@@ -297,7 +297,7 @@
     color: #fff;
 }
 
-.event-text {
+.event-company {
     font-size: clamp(1.2rem, 1cqi, 1.4rem);
     line-height: 2rem;
     color: #fff;
