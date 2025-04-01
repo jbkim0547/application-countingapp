@@ -69,11 +69,6 @@ const Calendar = () => {
     setEventNote("");
     setEventTime({ hours: "", minutes: "" });
     setEditingEvent(null);
-
-    // if (clickedDate >= today) {
-    //     setSelectedDate(clickedDate)
-    //     setShowEventPopup(true)
-    // }
   };
 
   const isSameDay = (date1, date2) => {
@@ -142,10 +137,19 @@ const Calendar = () => {
     setShowEventPopup(true);
   };
 
-  const handleDeleteEvent = (eventId) => {
+  const handleDeleteEvent = async (eventId) => {
     const updatedEvents = events.filter((event) => event.id !== eventId);
 
     setEvents(updatedEvents);
+
+    const response = await axios.delete(
+      `http://localhost:5065/api/interviewNote/${eventId}`,
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
   };
 
   const handleTimeChange = (e) => {
@@ -250,7 +254,7 @@ const Calendar = () => {
         {events.map((event, index) => (
           <div className="event" key={index}>
             <div className="event-date-wrapper">
-              <div className="event-date">{event.date}</div>
+              <div className="event-date">{event.date.toString()}</div>
             </div>
             <div className="event-company">{event.company}</div>
             <div className="event-buttons">
