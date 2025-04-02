@@ -193,6 +193,7 @@
     border-radius: .5rem;
     color: #78879e;
     transition: border 0.5s;
+    font-size: 200%
 }
 
 .event-popup textarea:focus {
