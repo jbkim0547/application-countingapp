@@ -257,20 +257,32 @@ const Calendar = () => {
               <div className="event-date">{event.date.toString()}</div>
             </div>
             <div className="event-company">{event.company}</div>
-            <div className="event-buttons">
-              <i
-                Style="font-size:200%"
-                className="bx bxs-edit-alt"
-                onClick={() => handleEditEvent(event)}
-              ></i>
-              <i
-                Style="font-size:200%"
-                className="bx bxs-message-alt-x"
-                onClick={() => handleDeleteEvent(event.id)}
-              ></i>
+
+            <div className="event-icon-button">
+              <div className="event-buttons">
+                <div className="event-icon" >
+                  <i
+                    Style="font-size:200%; margin-bottom: 40%"
+                    className="bx bxs-edit-alt"
+                    onClick={() => handleEditEvent(event)}
+                  ></i>
+                  <i
+                    Style="font-size:200%; margin-top: 30%;"
+                    className="bx bxs-message-alt-x"
+                    onClick={() => handleDeleteEvent(event.id)}
+                  ></i>
+                </div>
+                <div className="event-note-button">
+                  <button Style= "margin-top: 20%">See Note</button>
+                </div>
+              </div>
             </div>
           </div>
         ))}
+      </div>
+      <div className="noteSummary">
+        <div className="noteCompanyName">Company Name</div>
+        <div className="noteContext">test note</div>
       </div>
     </div>
   );
