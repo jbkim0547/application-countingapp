@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { IoClose } from "react-icons/io5";
 
 const Calendar = () => {
   const daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
@@ -29,6 +30,9 @@ const Calendar = () => {
   const [eventCompany, setEventCompany] = useState("");
   const [editingEvent, setEditingEvent] = useState(null);
   const [scheduleData, setScheduleData] = useState(null);
+  const [showNote, setShowNote] = useState(false);
+  const [companyName, setComPanyName] = useState("")
+  
 
   const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
   const firstDayOfMonth = new Date(currentYear, currentMonth, 1).getDate();
@@ -161,6 +165,25 @@ const Calendar = () => {
     }));
   };
 
+  const  noteSelect = async(selectedId) => {
+    const response = await axios.get(
+      `http://localhost:5065/api/interviewNote/${selectedId}`,
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    setShowNote(true);
+    setComPanyName(response.data.company)
+    setEventNote(response.data.note)
+    console.log(response.data.company)
+  };
+
+  const noteClose = () => {
+    setShowNote(false);
+  };
+
   return (
     <div className="appliation-calendar">
       <div className="calendar">
@@ -260,7 +283,7 @@ const Calendar = () => {
 
             <div className="event-icon-button">
               <div className="event-buttons">
-                <div className="event-icon" >
+                <div className="event-icon">
                   <i
                     Style="font-size:200%; margin-bottom: 40%"
                     className="bx bxs-edit-alt"
@@ -273,17 +296,22 @@ const Calendar = () => {
                   ></i>
                 </div>
                 <div className="event-note-button">
-                  <button Style= "margin-top: 20%">See Note</button>
+                  <button onClick={() => noteSelect(event.id)} Style="margin-top: 20%">
+                    See Note
+                  </button>
                 </div>
               </div>
             </div>
           </div>
         ))}
       </div>
-      <div className="noteSummary">
-        <div className="noteCompanyName">Company Name</div>
-        <div className="noteContext">test note</div>
-      </div>
+      {showNote && (
+        <div className="noteSummary">
+          <div className="noteCompanyName">{companyName}</div>
+          <div className="noteContext">{eventNote}</div>
+          <IoClose onClick={noteClose} className="noteCloseIcon" />
+        </div>
+      )}
     </div>
   );
 };
