@@ -12,6 +12,7 @@ import {
 import Calendar from "./Calendar/Calendar";
 import "./Calendar/Calendar.css";
 import JobScript from "./JobScript/JobScript";
+import InterviewNote from "./Interview/InterviewNote";
 
 const label = { inputProps: { "aria-label": "Checkbox demo" } };
 
@@ -30,6 +31,7 @@ function App() {
             <Route path="/count" element={<Count checked={checked} setChecked={setChecked}/>} />
             <Route path="/calendar" element={<Calendar />} />
             <Route path="/jobScript" element={<JobScript />} />
+            <Route path="/interviewNote" element={<InterviewNote />} />
           </Routes>
         <div>
           <br></br>

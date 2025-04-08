@@ -25,7 +25,7 @@ function NavBar() {
               <Link className="nav-link" to="/jobScript">Job Script</Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to="/jobScript">Interview Memo</Link>
+              <Link className="nav-link" to="/interviewNote">Interview Memo</Link>
             </li>
           </ul>
         </div>
