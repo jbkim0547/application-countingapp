@@ -3,7 +3,7 @@ const InterviewNote = () => {
     <div>
       <div>Company Name</div>
 
-      <div className="interviewNo">
+      <div className="interviewNote">
         Note Inteview
       </div>
     </div>
