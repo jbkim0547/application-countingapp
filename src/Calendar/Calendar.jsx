@@ -44,6 +44,7 @@ const Calendar = () => {
         setScheduleData(response.data);
         console.log(response.data);
         setEvents(response.data);
+
       })
       .catch((error) => {
         console.log("error");
