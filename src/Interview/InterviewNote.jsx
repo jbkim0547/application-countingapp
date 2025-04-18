@@ -5,47 +5,84 @@ import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import IconButton from "@mui/material/IconButton";
 import ListItemText from "@mui/material/ListItemText";
-import CommentIcon from "@mui/icons-material/Comment";
 
 const InterviewNote = () => {
   const [companyName, setCompanyName] = useState([]);
+  const [showInterviewNote, setShowIntervienNote] = useState(false);
+  const [duringInterviewCompanyName, setDuringInterviewCompanyName] =
+    useState("");
+  const [duringInterviewNote, setDuringInterviewNote] = useState("");
   useEffect(() => {
     axios
       .get("http://localhost:5065/api/duringInterviewNote")
       .then((response) => {
         setCompanyName(response.data);
-        companyName(response.data);
-        console.log(response.data);
       })
       .catch((error) => {
-        console.log("error");
+        console.log(error);
       });
   }, []);
 
+  const interviewNoteButton = async (selectedId) => {
+    const response = await axios.get(
+      `http://localhost:5065/api/duringInterviewNote/${selectedId}`,
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    console.log(response);
+    setShowIntervienNote(true);
+    setDuringInterviewCompanyName(response.data.CompanyName);
+    setDuringInterviewNote(response.data.InterviewNote);
+  };
+
   return (
     <React.Fragment>
-      <List sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}>
-        {companyName.map((value, index) => (
-          <ListItem
-            key={index}
-            disableGutters
-            secondaryAction={
-              <IconButton edge="end" aria-label="comment">
-                <CommentIcon />
-              </IconButton>
-            }
-          >
-            <ListItemText primary={`Line item ${value.name}`} />
-          </ListItem>
-        ))}
-      </List>
-      <div>
-        <div className="interviewNote">
-          <div className="noteTitle">Interview Note</div>
-          <div className="companyName">Company Name</div>
+      <div className="interviewNoteAllPage">
+        <List
+          sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}
+        >
+          <div className="companyNameAndList">
+            <div className="CompanyNoteAndName">
+            <div> Company Name </div>
+            <button className="newNote">New Note</button>
+            </div>
+            {companyName.map((value, index) => (
+              <ListItem
+                key={index}
+                disableGutters
+                secondaryAction={
+                  <IconButton edge="end" aria-label="comment"></IconButton>
+                }
+              >
+                <ListItemText primary={`${value.CompanyName}`} />
+                <div className="interviewNoteButton">
+                  <button onClick={() => interviewNoteButton(value.Id)}>
+                    See Note
+                  </button>
+                </div>
+              </ListItem>
+            ))}
+          </div>
+          
+        </List>
+        {showInterviewNote && (
+          <div>
+            <div className="interviewNote">
+              <div className="noteTitle">{duringInterviewCompanyName}</div>
+              <div className="companyName">{duringInterviewNote}</div>
 
-          <textarea className="noteInput" placeholder="Write a note"></textarea>
-        </div>
+              <textarea
+                className="noteInput"
+                placeholder="Write a note"
+              ></textarea>
+            </div>
+          </div>
+        )}
+
+        
       </div>
     </React.Fragment>
   );

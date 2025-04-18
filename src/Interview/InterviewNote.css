@@ -1,12 +1,12 @@
 .interviewNote {
-    width: 45%;
-    height: 700px;
+    width: 300%;
+    height: 500px;
     background-color: #00a3ff;
     padding: 1.5rem 0;
     border-radius: 1rem;
     align-items: center;
     margin-top: 2%;
-    margin-left: 30%
+    margin-left: 0%
 }
 
 .noteTitle
@@ -23,7 +23,7 @@
     background-color: #00a3ff;
     border: none;
     outline:none;
-    height: 550px;
+    height: 300px;
     width: 90%;
     margin-top: 5%;
     margin-left: 1%
@@ -32,4 +32,30 @@
 
 .companyName{
     margin-left: 5%
+    
+}
+
+.interviewNoteAllPage
+{
+    display: flex;
+}
+
+.companyNameAndList
+{
+    margin-left: 10%;
+    margin-top: 5%;
+}
+
+.interviewNoteButton
+{
+    margin-right: 15%;
+}
+
+.CompanyNoteAndName{
+    display:flex;
+}
+
+.newNote{
+    margin-left: 10%;
+    margin-bottom: 5%;
 }
