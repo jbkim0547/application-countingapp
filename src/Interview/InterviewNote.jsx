@@ -12,6 +12,9 @@ const InterviewNote = () => {
   const [duringInterviewCompanyName, setDuringInterviewCompanyName] =
     useState("");
   const [duringInterviewNote, setDuringInterviewNote] = useState("");
+  const [isCreating, setIsCreating] = useState(false);
+  const [newShowInterviewNote, setNewShowInterviewNote] = useState(false);
+
   useEffect(() => {
     axios
       .get("http://localhost:5065/api/duringInterviewNote")
@@ -23,7 +26,7 @@ const InterviewNote = () => {
       });
   }, []);
 
-  const interviewNoteButton = async (selectedId) => {
+  const interviewNoteButton = async (selectedId, e) => {
     const response = await axios.get(
       `http://localhost:5065/api/duringInterviewNote/${selectedId}`,
       {
@@ -32,10 +35,22 @@ const InterviewNote = () => {
         },
       }
     );
+
+    if (e.target.className.includes("newNote")) {
+    }
     console.log(response);
     setShowIntervienNote(true);
+    setNewShowInterviewNote(false);
     setDuringInterviewCompanyName(response.data.CompanyName);
     setDuringInterviewNote(response.data.InterviewNote);
+  };
+
+  const newNoteButtonClick = () => {
+    setShowIntervienNote(false);
+    setNewShowInterviewNote(true);
+    setIsCreating(true);
+    setDuringInterviewCompanyName("Company Name");
+    setDuringInterviewNote("");
   };
 
   return (
@@ -46,8 +61,10 @@ const InterviewNote = () => {
         >
           <div className="companyNameAndList">
             <div className="CompanyNoteAndName">
-            <div> Company Name </div>
-            <button className="newNote">New Note</button>
+              <div> Company Name </div>
+              <button className="newNote" onClick={newNoteButtonClick}>
+                New Note
+              </button>
             </div>
             {companyName.map((value, index) => (
               <ListItem
@@ -59,20 +76,31 @@ const InterviewNote = () => {
               >
                 <ListItemText primary={`${value.CompanyName}`} />
                 <div className="interviewNoteButton">
-                  <button onClick={() => interviewNoteButton(value.Id)}>
+                  <button
+                    className="openInterviewNote"
+                    onClick={(e) => interviewNoteButton(value.Id, e)}
+                  >
                     See Note
                   </button>
                 </div>
               </ListItem>
             ))}
           </div>
-          
         </List>
         {showInterviewNote && (
           <div>
             <div className="interviewNote">
               <div className="noteTitle">{duringInterviewCompanyName}</div>
               <div className="companyName">{duringInterviewNote}</div>
+
+            </div>
+          </div>
+        )}
+
+        {newShowInterviewNote && (
+          <div>
+            <div className="newInterviewNote">
+              <input placeholder="Company name"></input>
 
               <textarea
                 className="noteInput"
@@ -81,8 +109,6 @@ const InterviewNote = () => {
             </div>
           </div>
         )}
-
-        
       </div>
     </React.Fragment>
   );

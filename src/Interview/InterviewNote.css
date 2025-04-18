@@ -1,5 +1,5 @@
 .interviewNote {
-    width: 300%;
+    width: 400%;
     height: 500px;
     background-color: #00a3ff;
     padding: 1.5rem 0;
@@ -58,4 +58,34 @@
 .newNote{
     margin-left: 10%;
     margin-bottom: 5%;
+}
+
+.newInterviewNote{
+    width: 200%;
+    height: 500px;
+    background-color: #00a3ff;
+    padding: 1.5rem 0;
+    border-radius: 1rem;
+    align-items: center;
+    margin-top: 2%;
+    margin-left: 0%
+}
+
+.newNoteTitle{
+    text-align: center;
+    font-size: 30px
+}
+
+.newCompanyName{
+    margin-left: 5%
+}
+
+.newNoteInput{
+    background-color: #00a3ff;
+    border: none;
+    outline:none;
+    height: 300px;
+    width: 90%;
+    margin-top: 5%;
+    margin-left: 1%
 }
