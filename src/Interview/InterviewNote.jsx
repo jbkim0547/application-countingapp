@@ -14,6 +14,8 @@ const InterviewNote = () => {
   const [duringInterviewNote, setDuringInterviewNote] = useState("");
   const [isCreating, setIsCreating] = useState(false);
   const [newShowInterviewNote, setNewShowInterviewNote] = useState(false);
+  const [newCompanyName, setNewCompanyName] = useState("");
+  const [newInterviewNote, setNewInterviewNote] = useState("");
 
   useEffect(() => {
     axios
@@ -51,6 +53,32 @@ const InterviewNote = () => {
     setIsCreating(true);
     setDuringInterviewCompanyName("Company Name");
     setDuringInterviewNote("");
+  };
+
+  const newInterviewNoteButtonClick = async (e) => {
+    const newInterview = {
+      CompanyName: newCompanyName,
+      InterviewNote: newInterviewNote,
+    };
+    console.log(newInterview);
+
+    const response = await axios.post(
+      "http://localhost:5065/api/duringInterviewNote",
+      newInterview,
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    ).then((response)=>{
+      console.log(response.data);
+      setNewCompanyName("");
+      setNewInterviewNote("");
+      setNewShowInterviewNote(false);
+
+      setCompanyName((prev) => [...prev, response.data]);
+
+    });
   };
 
   return (
@@ -92,7 +120,6 @@ const InterviewNote = () => {
             <div className="interviewNote">
               <div className="noteTitle">{duringInterviewCompanyName}</div>
               <div className="companyName">{duringInterviewNote}</div>
-
             </div>
           </div>
         )}
@@ -100,12 +127,26 @@ const InterviewNote = () => {
         {newShowInterviewNote && (
           <div>
             <div className="newInterviewNote">
-              <input placeholder="Company name"></input>
+              <input
+                value={newCompanyName}
+                onChange={(e) => setNewCompanyName(e.target.value)}
+                className="interviewNoteCompanyName"
+                placeholder="Company name"
+              ></input>
 
               <textarea
-                className="noteInput"
+                value={newInterviewNote}
+                onChange={(e) => setNewInterviewNote(e.target.value)}
+                className="newNoteInput"
                 placeholder="Write a note"
               ></textarea>
+
+              <button
+                className="newInterviewNoteSaveButton"
+                onClick={newInterviewNoteButtonClick}
+              >
+                Save
+              </button>
             </div>
           </div>
         )}
