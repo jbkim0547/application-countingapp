@@ -6,13 +6,19 @@
     border-radius: 1rem;
     align-items: center;
     margin-top: 2%;
-    margin-left: 0%
+    margin-left: 80%;
+    flex-direction: column;
+    box-sizing: border-box;
+    overflow-wrap: break-word;
+    overflow: hidden; 
+
 }
 
 .noteTitle
 {
     text-align: center;
     font-size: 30px
+    
 }
 
 .noteContents{
@@ -44,6 +50,7 @@
 {
     margin-left: 10%;
     margin-top: 5%;
+    width: 130%
 }
 
 .interviewNoteButton
@@ -68,7 +75,7 @@
     border-radius: 1rem;
     align-items: center;
     margin-top: 2%;
-    margin-left: 0%
+    margin-left: 20%
 }
 
 .newNoteTitle{
@@ -93,4 +100,8 @@
 .interviewNoteCompanyName{
     text-align: center;
     margin-left: 35%
+}
+
+.deleteNoteButton{
+    margin-left: 10px;
 }
