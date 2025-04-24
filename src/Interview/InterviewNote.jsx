@@ -89,7 +89,7 @@ const InterviewNote = () => {
         >
           <div className="companyNameAndList">
             <div className="CompanyNoteAndName">
-              <div> Company Name </div>
+              
               <button className="newNote" onClick={newNoteButtonClick}>
                 New Note
               </button>
