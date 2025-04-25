@@ -81,6 +81,22 @@ const InterviewNote = () => {
     });
   };
 
+  const deleteNoteButtonClick = async (selectedId) =>{
+    const response = await axios.delete(
+      `http://localhost:5065/api/duringInterviewNote/${selectedId}`,
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
+    
+    setCompanyName((prev) => prev.filter((item => item.Id !== selectedId)));
+
+
+  }
+
   return (
     <React.Fragment>
       <div className="interviewNoteAllPage">
@@ -110,6 +126,8 @@ const InterviewNote = () => {
                   >
                     See Note
                   </button>
+
+                  <button onClick={(e)=>deleteNoteButtonClick(value.Id, e)} className="deleteNoteButton">Delete Note</button>
                 </div>
               </ListItem>
             ))}
