@@ -14,7 +14,7 @@ function Count({ checked, setChecked }) {
   };
   return (
     <React.Fragment>
-      <div Style="margin-top:30px;">Apply Count</div>
+      <div className= "applicationCount"Style="margin-top:30px;">Apply Count</div>
       <div
         Style="margin-top:-10px"
         id="checkBox-container"
