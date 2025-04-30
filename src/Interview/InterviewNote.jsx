@@ -119,7 +119,7 @@ const InterviewNote = () => {
                 }
               >
                 <ListItemText primary={`${value.CompanyName}`} />
-                <div className="interviewNoteButton">-
+                <div className="interviewNoteButton">
                   <button
                     className="openInterviewNote"
                     onClick={(e) => interviewNoteButton(value.Id, e)}
