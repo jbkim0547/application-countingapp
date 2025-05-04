@@ -5,6 +5,9 @@ import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import IconButton from "@mui/material/IconButton";
 import ListItemText from "@mui/material/ListItemText";
+import Stack from "@mui/material/Stack";
+import Button from "@mui/material/Button";
+import { red } from "@mui/material/colors";
 
 const InterviewNote = () => {
   const [companyName, setCompanyName] = useState([]);
@@ -62,26 +65,23 @@ const InterviewNote = () => {
     };
     console.log(newInterview);
 
-    const response = await axios.post(
-      "http://localhost:5065/api/duringInterviewNote",
-      newInterview,
-      {
+    const response = await axios
+      .post("http://localhost:5065/api/duringInterviewNote", newInterview, {
         headers: {
           "Content-Type": "application/json",
         },
-      }
-    ).then((response)=>{
-      console.log(response.data);
-      setNewCompanyName("");
-      setNewInterviewNote("");
-      setNewShowInterviewNote(false);
+      })
+      .then((response) => {
+        console.log(response.data);
+        setNewCompanyName("");
+        setNewInterviewNote("");
+        setNewShowInterviewNote(false);
 
-      setCompanyName((prev) => [...prev, response.data]);
-
-    });
+        setCompanyName((prev) => [...prev, response.data]);
+      });
   };
 
-  const deleteNoteButtonClick = async (selectedId) =>{
+  const deleteNoteButtonClick = async (selectedId) => {
     const response = await axios.delete(
       `http://localhost:5065/api/duringInterviewNote/${selectedId}`,
       {
@@ -91,11 +91,8 @@ const InterviewNote = () => {
       }
     );
 
-    
-    setCompanyName((prev) => prev.filter((item => item.Id !== selectedId)));
-
-
-  }
+    setCompanyName((prev) => prev.filter((item) => item.Id !== selectedId));
+  };
 
   return (
     <React.Fragment>
@@ -105,10 +102,11 @@ const InterviewNote = () => {
         >
           <div className="companyNameAndList">
             <div className="CompanyNoteAndName">
-              
-              <button className="newNote" onClick={newNoteButtonClick}>
-                New Note
-              </button>
+              <Stack className="newNote" spacing={2} direction="row">
+                <Button variant="contained" onClick={newNoteButtonClick}>
+                  New Note
+                </Button>
+              </Stack>
             </div>
             {companyName.map((value, index) => (
               <ListItem
@@ -118,16 +116,32 @@ const InterviewNote = () => {
                   <IconButton edge="end" aria-label="comment"></IconButton>
                 }
               >
-                <ListItemText primary={`${value.CompanyName}`} />
+                <ListItemText
+                  className="listCompanyName"
+                  primary={`${value.CompanyName}`}
+                />
                 <div className="interviewNoteButton">
-                  <button
+                  <Stack
                     className="openInterviewNote"
-                    onClick={(e) => interviewNoteButton(value.Id, e)}
+                    spacing={2}
+                    direction="row"
                   >
-                    See Note
-                  </button>
-
-                  <button onClick={(e)=>deleteNoteButtonClick(value.Id, e)} className="deleteNoteButton">Delete Note</button>
+                    <Button
+                      variant="contained"
+                      onClick={(e) => interviewNoteButton(value.Id, e)}
+                    >
+                      See Note
+                    </Button>
+                  </Stack>
+                  <Stack
+                    className="deleteNoteButton"
+                    spacing={2}
+                    direction="row"
+                  >
+                    <Button variant="contained" sx={{backgroundColor:'red'}}onClick={(e) => deleteNoteButtonClick(value.Id, e)}>
+                      Delete Note
+                    </Button>
+                  </Stack>
                 </div>
               </ListItem>
             ))}
