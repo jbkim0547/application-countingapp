@@ -11,3 +11,8 @@
     margin-left: 10px;
 }
 
+.checkBoxContainer{
+    display:flex;
+    flex-direction: column;
+}
+
