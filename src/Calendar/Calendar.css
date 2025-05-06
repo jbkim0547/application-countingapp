@@ -328,6 +328,7 @@
 
 .event-icon-button{
     display:flex;
+    margin-top:5px;
 
 }
 
@@ -380,6 +381,10 @@
     color: #fff;
     cursor:pointer;
 
+}
+
+.event-icon{
+    margin-top: 20px;
 }
 
 @media (max-width: 850px) {

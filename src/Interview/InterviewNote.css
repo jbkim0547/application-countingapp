@@ -98,10 +98,18 @@
     margin-left: 1%
 }
 
+.newNoteInput::placeholder{
+    color:darkslategray;
+}
+
 .interviewNoteCompanyName{
     text-align: center;
-    margin-left: 35%
+    margin-left: 35%;
+    border-radius: 7px;
+    padding: 10px;
+    border: 1px solid #ccc;
 }
+
 
 .deleteNoteButton{
     margin-left: 10px;
@@ -109,7 +117,8 @@
 }
 
 .newInterviewNoteSaveButton{
-    margin-right: 10px;
+    margin-left: 280px;
+    
 }
 
 .listCompanyName{

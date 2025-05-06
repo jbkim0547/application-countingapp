@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { IoClose } from "react-icons/io5";
+import Stack from "@mui/material/Stack";
+import Button from "@mui/material/Button";
 
 const Calendar = () => {
   const daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
@@ -31,8 +33,7 @@ const Calendar = () => {
   const [editingEvent, setEditingEvent] = useState(null);
   const [scheduleData, setScheduleData] = useState(null);
   const [showNote, setShowNote] = useState(false);
-  const [companyName, setComPanyName] = useState("")
-  
+  const [companyName, setComPanyName] = useState("");
 
   const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
   const firstDayOfMonth = new Date(currentYear, currentMonth, 1).getDate();
@@ -44,7 +45,6 @@ const Calendar = () => {
         setScheduleData(response.data);
         console.log(response.data);
         setEvents(response.data);
-
       })
       .catch((error) => {
         console.log(error);
@@ -166,7 +166,7 @@ const Calendar = () => {
     }));
   };
 
-  const  noteSelect = async(selectedId) => {
+  const noteSelect = async (selectedId) => {
     const response = await axios.get(
       `http://localhost:5065/api/interviewNote/${selectedId}`,
       {
@@ -176,9 +176,9 @@ const Calendar = () => {
       }
     );
     setShowNote(true);
-    setComPanyName(response.data.company)
-    setEventNote(response.data.note)
-    console.log(response.data.company)
+    setComPanyName(response.data.company);
+    setEventNote(response.data.note);
+    console.log(response.data.company);
   };
 
   const noteClose = () => {
@@ -297,9 +297,20 @@ const Calendar = () => {
                   ></i>
                 </div>
                 <div className="event-note-button">
-                  <button onClick={() => noteSelect(event.id)} Style="margin-top: 20%">
-                    See Note
-                  </button>
+                  <Stack
+                    className="seeNoteButton"
+                    spacing={2}
+                    direction="row"
+                  >
+                    <Button
+                      variant="contained"
+                      onClick={() => noteSelect(event.id)}
+                      Style="margin-top: 20%"
+                    >
+                      See Note
+                    </Button>
+                  </Stack>
+
                 </div>
               </div>
             </div>

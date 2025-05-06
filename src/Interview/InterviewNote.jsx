@@ -138,7 +138,11 @@ const InterviewNote = () => {
                     spacing={2}
                     direction="row"
                   >
-                    <Button variant="contained" sx={{backgroundColor:'red'}}onClick={(e) => deleteNoteButtonClick(value.Id, e)}>
+                    <Button
+                      variant="contained"
+                      sx={{ backgroundColor: "red" }}
+                      onClick={(e) => deleteNoteButtonClick(value.Id, e)}
+                    >
                       Delete Note
                     </Button>
                   </Stack>
@@ -172,13 +176,15 @@ const InterviewNote = () => {
                 className="newNoteInput"
                 placeholder="Write a note"
               ></textarea>
-
-              <button
+              <Stack
                 className="newInterviewNoteSaveButton"
-                onClick={newInterviewNoteButtonClick}
+                spacing={2}
+                direction="row"
               >
-                Save
-              </button>
+                <Button variant="contained" color="success" onClick={newInterviewNoteButtonClick}>
+                  Save
+                </Button>
+              </Stack>
             </div>
           </div>
         )}
