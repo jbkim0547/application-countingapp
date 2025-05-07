@@ -4,6 +4,7 @@ import "./Count.css";
 import { Checkbox } from "@mui/material";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
+import axios from "axios";
 
 const label = { inputProps: { "aria-label": "Checkbox demo" } };
 
@@ -14,9 +15,21 @@ function Count({ checked, setChecked }) {
     setChecked(updated);
   };
 
-  function appCountSaveButton () {
-    
-  }
+  const appCountSaveButton = async () => {
+    const count = {
+      Count: checked.filter(Boolean).length,
+      Date: new Date()
+    };
+    const response = await axios.post(
+      "http://localhost:5065/api/applicationCount",
+      count,
+      { headers: { "Content-Type": "application/json"} }
+    ).then(
+      console.log(checked.filter(Boolean).length + " " + "Application count saved"),
+      setChecked(new Array(checked.length).fill(false))
+      
+    );
+  };
   return (
     <React.Fragment>
       <div className="applicationCount" Style="margin-top:30px;">
@@ -49,7 +62,7 @@ function Count({ checked, setChecked }) {
               onClick={() => appCountSaveButton()}
               Style="margin-top: 10px"
             >
-              See Note
+              Save
             </Button>
           </Stack>
         </div>
