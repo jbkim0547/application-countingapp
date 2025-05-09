@@ -18,18 +18,23 @@ function Count({ checked, setChecked }) {
   const appCountSaveButton = async () => {
     const count = {
       Count: checked.filter(Boolean).length,
-      Date: new Date()
+      Date: new Date(),
     };
-    const response = await axios.post(
-      "http://localhost:5065/api/applicationCount",
-      count,
-      { headers: { "Content-Type": "application/json"} }
-    ).then(
-      console.log(checked.filter(Boolean).length + " " + "Application count saved"),
-      setChecked(new Array(checked.length).fill(false))
-      
-    );
+    const response = await axios
+      .post("http://localhost:5065/api/applicationCount", count, {
+        headers: { "Content-Type": "application/json" },
+      })
+      .then(
+        console.log(
+          checked.filter(Boolean).length + " " + "Application count saved"
+        ),
+        setChecked(new Array(checked.length).fill(false))
+      );
   };
+
+  const appCountClearButton = () =>{
+    setChecked(new Array(checked.length).fill(false))
+  }
   return (
     <React.Fragment>
       <div className="applicationCount" Style="margin-top:30px;">
@@ -56,15 +61,26 @@ function Count({ checked, setChecked }) {
               ))}
             </div>
           </div>
-          <Stack className="seeNoteButton" spacing={2} direction="row">
-            <Button
-              variant="contained"
-              onClick={() => appCountSaveButton()}
-              Style="margin-top: 10px"
-            >
-              Save
-            </Button>
-          </Stack>
+          <div className="allButtons">
+            <Stack className="seeNoteButton" spacing={2} direction="row">
+              <Button
+                variant="contained"
+                onClick={() => appCountSaveButton()}
+                Style="margin-top: 10px"
+              >
+                Save
+              </Button>
+            </Stack>
+            <Stack className="clearCountButton" spacing={2} direction="row">
+              <Button
+                variant="contained"
+                onClick={() => appCountClearButton()}
+                Style="margin-top: 10px"
+              >
+                Clear
+              </Button>
+            </Stack>
+          </div>
         </div>
       </div>
     </React.Fragment>

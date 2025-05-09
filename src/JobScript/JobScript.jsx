@@ -3,7 +3,7 @@ import "./JobScript.css";
 const JobScript = () => {
   return (
     <>
-      <div className="title">Job Description</div>
+      <div className="title">Job Memo</div>
       <div className="jobScript">
         LinkedIn profile https://www.linkedin.com/in/jb-kim-14a820132/ <br />{" "}
         <br />
