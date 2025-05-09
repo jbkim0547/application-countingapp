@@ -18,7 +18,7 @@ const label = { inputProps: { "aria-label": "Checkbox demo" } };
 
 function App() {
 
-  const [checked, setChecked] = useState(Array(10).fill(false));
+  const [checked, setChecked] = useState(Array(20).fill(false));
   React.useEffect(() => {
     document.title = "Job Helper";
   });

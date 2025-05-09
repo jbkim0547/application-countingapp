@@ -45,9 +45,7 @@ function Count({ checked, setChecked }) {
         id="checkBox-container"
         className="float-container"
       >
-        <div className="float-child">
-          <div Style="margin-top:10px; margin-right:4px">1. </div>
-        </div>
+
         <div className="checkBoxContainer">
           <div class="float-child">
             <div>
