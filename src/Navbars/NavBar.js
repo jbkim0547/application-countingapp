@@ -16,6 +16,9 @@ function NavBar() {
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav">
             <li className="nav-item">
+              <Link className="nav-link" to="/loginSignup">Login</Link>
+            </li>
+            <li className="nav-item">
               <Link className="nav-link" to="/count">Job Count</Link>
             </li>
             <li className="nav-item">

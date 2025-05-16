@@ -13,6 +13,7 @@ import Calendar from "./Calendar/Calendar";
 import "./Calendar/Calendar.css";
 import JobScript from "./JobScript/JobScript";
 import InterviewNote from "./Interview/InterviewNote";
+import LoginSignup from "./LoginSignup/LoginSignup"
 
 const label = { inputProps: { "aria-label": "Checkbox demo" } };
 
@@ -32,6 +33,7 @@ function App() {
             <Route path="/calendar" element={<Calendar />} />
             <Route path="/jobScript" element={<JobScript />} />
             <Route path="/interviewNote" element={<InterviewNote />} />
+            <Route path="/loginSignup" element={<LoginSignup />} />
           </Routes>
         <div>
           <br></br>
