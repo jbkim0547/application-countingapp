@@ -3,9 +3,34 @@ import "./LoginSignup.css";
 import user_Icon from "../Assets/person.png";
 import email_Icon from "../Assets/email.png";
 import password_Icon from "../Assets/password.png";
+import axios from "axios";
 
 const LoginSignup = () => {
   const [action, setAction] = useState("Login");
+  const [userName, setUserName] = useState("");
+  const [userEmail, setUserEmail] = useState("");
+  const [userPassword, setUserPassword] = useState("");
+
+  const onSingUpClick = async () => {
+    setAction("SignUp");
+
+    const userInfo = {
+      Email: userEmail,
+      Password: userPassword,
+      Name: userName
+    }
+
+    const response = await axios
+      .post("http://localhost:5065/api/auth/register", userInfo, {
+        headers: {
+          "Content-Type": "application/json"
+        },
+      }).then(()=>{
+        setUserName("");
+        setUserEmail("");
+        setUserPassword("");
+      })
+  };
 
   return (
     <div className="container">
@@ -19,38 +44,56 @@ const LoginSignup = () => {
         ) : (
           <div className="input">
             <img src={user_Icon} alt="" />
-            <input type="text" placeholder="Name" />
+            <input
+              value={userName}
+              onChange={(e) => setUserName(e.target.value)}
+              type="text"
+              placeholder="Name"
+            />
           </div>
         )}
 
         <div className="input">
           <img src={email_Icon} alt="" />
-          <input type="email" placeholder="Email" />
+          <input
+            value={userEmail}
+            onChange={(e) => setUserEmail(e.target.value)}
+            type="email"
+            placeholder="Email"
+          />
         </div>
         <div className="input">
           <img src={password_Icon} alt="" />
-          <input type="password" placeholder="Password" />
+          <input
+            value={userPassword}
+            onChange={(e) => setUserPassword(e.target.value)}
+            type="password"
+            placeholder="Password"
+          />
         </div>
       </div>
-      {action === "Sign Up" ? (
+      {action === "SignUp" ? (
         <div></div>
       ) : (
-        <div className="forgot-password">
-          Lost Password? <span>Click Here!</span>
-        </div>
+        <><div className="forgot-password">
+            Lost Password? <span>Click Here!</span>
+          </div>
+          <div className="registerButton">
+            Do not have an account? <span onClick={()=>{setAction("SignUp")}}>Click here to register!</span>   
+          </div>
+          </>
+        
       )}
 
       <div className="submit-container">
         <div
           className={action === "Login" ? "submit gray" : "submit"}
-          onClick={() => {
-            setAction("Sign Up");
-          }}
+          onClick={onSingUpClick}
         >
           Sign Up
         </div>
         <div
-          className={action === "Sign Up" ? "submit gray" : "submit"}
+          className={action === "SignUp" ? "submit gray" : "submit"}
           onClick={() => {
             setAction("Login");
           }}
