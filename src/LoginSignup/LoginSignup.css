@@ -73,10 +73,22 @@
     cursor:pointer;
 }
 
+.registerButton{
+    padding-left: 62px;
+    margin-top: 5px;
+    color:#797979;
+    font-size: 18px;
+}
+
+.registerButton span {
+    color:#4c00b4;
+    cursor:pointer;
+}
+
 .submit-container {
     display:flex;
     gap:30px;
-    margin: 60px auto;
+    margin: 30px auto;
 }
 
 .submit {
@@ -94,6 +106,7 @@
 }
 
 .gray{
+    display: none;
     background: #eaeaea;
     color: #676767;
 }
