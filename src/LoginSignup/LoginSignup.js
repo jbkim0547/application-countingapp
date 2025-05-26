@@ -17,19 +17,40 @@ const LoginSignup = () => {
     const userInfo = {
       Email: userEmail,
       Password: userPassword,
-      Name: userName
-    }
+      Name: userName,
+    };
 
     const response = await axios
       .post("http://localhost:5065/api/auth/register", userInfo, {
         headers: {
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
         },
-      }).then(()=>{
+      })
+      .then(() => {
         setUserName("");
         setUserEmail("");
         setUserPassword("");
+      });
+  };
+
+  const onLoginClick = async () => {
+    setAction("Login");
+    const loginInfo = {
+      Email: userEmail,
+      Password: userPassword,
+    };
+
+    const response = await axios
+      .post("http://localhost:5065/api/auth/login", loginInfo, {
+        headers: {
+          "Content-Type": "application/json",
+        },
       })
+      .then(() => {
+        console.log("login Successful")
+        setUserEmail("");
+        setUserPassword("");
+      });
   };
 
   return (
@@ -42,61 +63,100 @@ const LoginSignup = () => {
         {action === "Login" ? (
           <div></div>
         ) : (
-          <div className="input">
-            <img src={user_Icon} alt="" />
-            <input
-              value={userName}
-              onChange={(e) => setUserName(e.target.value)}
-              type="text"
-              placeholder="Name"
-            />
-          </div>
+          <>
+            <div className="input">
+              <img src={user_Icon} alt="" />
+              <input
+                value={userName}
+                onChange={(e) => setUserName(e.target.value)}
+                type="text"
+                placeholder="Name"
+              />
+            </div>
+            <div className="input">
+              <img src={email_Icon} alt="" />
+              <input
+                value={userEmail}
+                onChange={(e) => setUserEmail(e.target.value)}
+                type="email"
+                placeholder="Email"
+              />
+            </div>
+            <div className="input">
+              <img src={password_Icon} alt="" />
+              <input
+                value={userPassword}
+                onChange={(e) => setUserPassword(e.target.value)}
+                type="password"
+                placeholder="Password"
+              />
+            </div>
+            <div className="loginPage">
+              Ready to Login?{" "}
+              <span
+                onClick={() => {
+                  setAction("Login");
+                }}
+              >
+                Click Here!
+              </span>
+            </div>
+          </>
         )}
-
-        <div className="input">
-          <img src={email_Icon} alt="" />
-          <input
-            value={userEmail}
-            onChange={(e) => setUserEmail(e.target.value)}
-            type="email"
-            placeholder="Email"
-          />
-        </div>
-        <div className="input">
-          <img src={password_Icon} alt="" />
-          <input
-            value={userPassword}
-            onChange={(e) => setUserPassword(e.target.value)}
-            type="password"
-            placeholder="Password"
-          />
-        </div>
       </div>
       {action === "SignUp" ? (
         <div></div>
       ) : (
-        <><div className="forgot-password">
-            Lost Password? <span>Click Here!</span>
+        <>
+          <div className="inputs">
+            <div className="input">
+              <img src={email_Icon} alt="" />
+              <input
+                value={userEmail}
+                onChange={(e) => setUserEmail(e.target.value)}
+                type="email"
+                placeholder="Email"
+              />
+            </div>
+            <div className="input">
+              <img src={password_Icon} alt="" />
+              <input
+                value={userPassword}
+                onChange={(e) => setUserPassword(e.target.value)}
+                type="password"
+                placeholder="Password"
+              />
+            </div>
+
+            <div className="forgot-password">
+              Lost Password? <span>Click Here!</span>
+            </div>
+            <div className="registerButton">
+              Do not have an account?{" "}
+              <span
+                onClick={() => {
+                  setAction("SignUp");
+                }}
+              >
+                Click here to register!
+              </span>
+            </div>
           </div>
-          <div className="registerButton">
-            Do not have an account? <span onClick={()=>{setAction("SignUp")}}>Click here to register!</span>   
-          </div>
-          </>
-        
+        </>
       )}
 
       <div className="submit-container">
         <div
-          className={action === "Login" ? "submit gray" : "submit"}
+          className={action === "Login" ? "submit buttonDisplayNone" : "submit"}
           onClick={onSingUpClick}
         >
           Sign Up
         </div>
         <div
-          className={action === "SignUp" ? "submit gray" : "submit"}
-          onClick={() => {
-            setAction("Login");
-          }}
+          className={
+            action === "SignUp" ? "submit buttonDisplayNone" : "submit"
+          }
+          onClick={onLoginClick}
         >
           Login
         </div>
