@@ -9,7 +9,7 @@ import axios from "axios";
 const label = { inputProps: { "aria-label": "Checkbox demo" } };
 
 function Count({ checked, setChecked }) {
-  const handleCheckBox = (index) => (e) => {
+  const handleCheckBox = (index) => (e) => {{
     const updated = [...checked];
     updated[index] = e.target.checked;
     setChecked(updated);
