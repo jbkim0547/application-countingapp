@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import "./Count.css";
 import { Checkbox } from "@mui/material";
 import Stack from "@mui/material/Stack";
-import Button from "@mui/material/Button";;;
+import Button from "@mui/material/Button";
 import axios from "axios";
 
 const label = { inputProps: { "aria-label": "Checkbox demo" } };
