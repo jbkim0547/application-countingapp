@@ -46,7 +46,8 @@ const LoginSignup = () => {
           "Content-Type": "application/json",
         },
       })
-      .then(() => {
+      .then((res) => {
+        localStorage.setItem("token", res.data.token);
         console.log("login Successful")
         setUserEmail("");
         setUserPassword("");

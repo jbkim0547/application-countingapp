@@ -21,8 +21,15 @@ const InterviewNote = () => {
   const [newInterviewNote, setNewInterviewNote] = useState("");
 
   useEffect(() => {
+    const token = localStorage.getItem("token")
+    console.log("JWT token:", token);
     axios
-      .get("http://localhost:5065/api/duringInterviewNote")
+      .get(
+        "http://localhost:5065/api/duringInterviewNote", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          }
+        })
       .then((response) => {
         setCompanyName(response.data);
       })
@@ -59,6 +66,7 @@ const InterviewNote = () => {
   };
 
   const newInterviewNoteButtonClick = async (e) => {
+    const token = localStorage.getItem("token")
     const newInterview = {
       CompanyName: newCompanyName,
       InterviewNote: newInterviewNote,
@@ -69,6 +77,7 @@ const InterviewNote = () => {
       .post("http://localhost:5065/api/duringInterviewNote", newInterview, {
         headers: {
           "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`
         },
       })
       .then((response) => {
