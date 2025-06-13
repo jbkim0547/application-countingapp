@@ -39,10 +39,12 @@ const InterviewNote = () => {
   }, []);
 
   const interviewNoteButton = async (selectedId, e) => {
+    const token = localStorage.getItem("token")
     const response = await axios.get(
       `http://localhost:5065/api/duringInterviewNote/${selectedId}`,
       {
         headers: {
+          Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
         },
       }
@@ -91,10 +93,12 @@ const InterviewNote = () => {
   };
 
   const deleteNoteButtonClick = async (selectedId) => {
+    const token = localStorage.getItem("token");
     const response = await axios.delete(
       `http://localhost:5065/api/duringInterviewNote/${selectedId}`,
       {
         headers: {
+          Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
         },
       }
