@@ -7,7 +7,7 @@ const JobScript = () => {
       <div className="jobScript">
         LinkedIn profile <br />https://www.linkedin.com/in/jb-kim-14a820132/ <br />{" "}
         <br />
-        Github Profile https://github.com/jbkim0547/JB-kim <br /> <br />
+        Github Profile <br />https://github.com/jbkim0547/JB-kim <br /> <br />
         Hello Kelly, hope I can connect you and join your successful career
         path! <br /> <br />
         It's nice to connect Trvor. I was wondering if you can give me a HUGE
